@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Data Form</title>
+</head>
+
+<body>
+  <h1>Enter Patient Details</h1>
+  <form method="POST">
+    <label for="first_name">First Name:</label><br>
+    <input type="text" id="first_name" name="first_name"><br>
+
+    <label for="last_name">Last Name:</label><br>
+    <input type="text" id="last_name" name="last_name"><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email"><br>
+
+    <label for="height">Height (cm):</label><br>
+    <input type="number" id="height" name="height"><br>
+
+    <label for="weight">Weight (kg):</label><br>
+    <input type="number" id="weight" name="weight"><br>
+
+    <label for="gender">Gender:</label><br>
+    <select id="gender" name="gender">
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select><br><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <h2>Patient Registry</h2>
+  <ul>
+    {% for user in users %}
+    <li>{{ user.first_name }} {{ user.last_name }} - {{ user.email }} - {{ user.height }}cm - {{ user.weight }}kg - {{
+      user.gender }}</li>
+    {% else %}
+    <li>No users found.</li>
+    {% endfor %}
+  </ul>
+</body>
+
+</html>
