@@ -29,9 +29,9 @@ jobs:
       - name: Build and Push Docker image
         run: |
           echo "Building and pushing Docker image..."
-          docker build -t patient_registry:latest .
+          docker build -t ${{ secrets.DOCKER_USER }}/patient_registry:latest .
           echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
-          docker push patient_registry:latest
+          docker push ${{ secrets.DOCKER_USER }}/patient_registry:latest
 
       - name: Pull Docker image
         run: |
