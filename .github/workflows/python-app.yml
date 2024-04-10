@@ -1,0 +1,38 @@
+name: Python application workflow
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Uncomment and replace the below lines with actual test commands
+      # - name: Run tests
+      #   run: |
+      #     python -m unittest discover
+
+      - name: Build and Push Docker image
+        run: |
+          echo "Building and pushing Docker image..."
+          docker build -t patient_registry:latest .
+          echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
+          docker push patient_registry:latest
+
+      - name: Pull Docker image
+        run: |
+          docker pull ${{ secrets.DOCKER_USER }}/patient_registry:latest
