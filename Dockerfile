@@ -13,3 +13,5 @@ ENV FLASK_ENV=development
 
 # Run app.py when the container launches
 CMD ["flask", "run", "--host=0.0.0.0"]
+
+#jonah test
